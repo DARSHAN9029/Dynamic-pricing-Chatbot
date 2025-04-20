@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from query_bot import get_bot_response
+from chatbot.query_bot import get_bot_response
 from flask_cors import CORS
 
 app = Flask(__name__)
