@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dynamic Pricing Chatbot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+    }
+
+    h2 {
+      text-align: center;
+      color: #4CAF50;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    #chat {
+      width: 100%;
+      max-width: 600px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background-color: #fff;
+      padding: 15px;
+      margin-bottom: 20px;
+      height: 300px;
+      overflow-y: auto;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="text"] {
+      width: calc(100% - 110px);
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      margin-right: 10px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      border-color: #4CAF50;
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .message {
+      margin-bottom: 10px;
+    }
+
+    .user {
+      color: #4CAF50;
+    }
+
+    .bot {
+      color: #007BFF;
+    }
+
+    /* Loader Styles */
+    .loader {
+      --dim: 3rem;
+      width: var(--dim);
+      height: var(--dim);
+      position: relative;
+      animation: spin988 2s linear infinite;
+      display: none; /* Hidden by default */
+      margin-left: 10px; /* Space between the button and loader */
+    }
+
+    .loader .circle {
+      --color: #333;
+      --dim: 1.2rem;
+      width: var(--dim);
+      height: var(--dim);
+      background-color: var(--color);
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .loader .circle:nth-child(1) {
+      top: 0;
+      left: 0;
+    }
+
+    .loader .circle:nth-child(2) {
+      top: 0;
+      right: 0;
+    }
+
+    .loader .circle:nth-child(3) {
+      bottom: 0;
+      left: 0;
+    }
+
+    .loader .circle:nth-child(4) {
+      bottom: 0;
+      right: 0;
+    }
+
+    @keyframes spin988 {
+      0% {
+        transform: scale(1) rotate(0);
+      }
+
+      20%, 25% {
+        transform: scale(1.3) rotate(90deg);
+      }
+
+      45%, 50% {
+        transform: scale(1) rotate(180deg);
+      }
+
+      70%, 75% {
+        transform: scale(1.3) rotate(270deg);
+      }
+
+      95%, 100% {
+        transform: scale(1) rotate(360deg);
+      }
+    }
+  </style>
+  <script>
+    async function sendMessage() {
+      const input = document.getElementById("userInput").value;
+      const loader = document.getElementById("loader");
+
+      // Show the loader before sending the request
+      loader.style.display = "inline-block";
+
+      // Send the message to the server
+      const res = await fetch("/chat", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({message: input})
+      });
+
+      // Get the response data
+      const data = await res.json();
+
+      // Append the user's message and bot's reply to the chat
+      document.getElementById("chat").innerHTML += `<p class="message user"><b>You:</b> ${input}</p>`;
+      document.getElementById("chat").innerHTML += `<p class="message bot"><b>Bot:</b> ${data.reply}</p>`;
+
+      // Hide the loader after receiving the response
+      loader.style.display = "none";
+
+      // Clear the input field and scroll to the latest message
+      document.getElementById("userInput").value = "";
+      document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
+    }
+  </script>
+</head>
+<body>
+  <div>
+    <h2>Ask About Our Pricing System</h2>
+    <div id="chat"></div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <input type="text" id="userInput" placeholder="Type your question...">
+      <button onclick="sendMessage()">Send</button>
+      <!-- Loader added next to the button -->
+      <div id="loader" class="loader">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

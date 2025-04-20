@@ -1,0 +1,75 @@
+
+SaveMore: Dynamic Pricing E-commerce Platform
+
+1. What do we do:
+SaveMore is a smart e-commerce platform that uses a dynamic pricing system to help buyers purchase products at reduced prices based on their expiry dates. Sellers (retailers and distributors) upload product information along with an image of the expiry date. Our system uses OCR powered by Gemini 1.5 to extract this data, then applies an ML model to determine optimal, time-sensitive pricing.
+
+We aim to reduce product wastage, promote affordability, and ensure customers get quality products at the right time, for the right price.
+
+2. How our website is different compared to the market:
+- Real-time dynamic pricing based on expiry dates using machine learning
+- OCR-based expiry date extraction for accuracy and automation
+- Real-time chat between buyers and sellers using Socket.io
+- Live order tracking so users can monitor their product journey
+- A user-friendly dashboard for both buyers and sellers
+- Structured purchase history and smart shop list tracking
+
+Unlike traditional e-commerce platforms, SaveMore doesn't fix product prices statically. Instead, our system adjusts the price as the product approaches its expiry — offering deeper discounts the closer it gets, while ensuring safe consumption timelines.
+
+3. Future Goals:
+- Integrate blockchain for secure product traceability and transaction logging
+- Launch a mobile app for wider accessibility
+- Use demand forecasting to influence dynamic pricing further
+- Partner with local stores and FMCG distributors to scale our network
+- Integrate sustainability analytics to show how much wastage was avoided
+- Build AI-driven recommendations based on expiry + demand data
+
+4. Benefits to Buyers / Retailers / Users:
+- Buyers: Save money on products without compromising on quality; access time-sensitive deals.
+- Retailers: Sell near-expiry stock efficiently, reduce losses, and optimize inventory.
+- Users (platform visitors): Track product discounts in real time; communicate with sellers for inquiries.
+
+5. Sample Questions You Can Ask Me (Chatbot Prompts):
+- "How does your pricing system work?"
+- "Why is this product cheaper here than in stores?"
+- "How do you calculate discounts?"
+- "How does demand affect pricing?"
+- "Is it safe to buy a product close to its expiry?"
+- "Can I return a near-expiry item if it's not good?"
+- "How accurate is the expiry date detection?"
+- "What kind of products are best to buy on SaveMore?"
+- "Do you provide alerts for new deals?"
+
+6. How Our Machine Learning Model Works (Dynamic Pricing System)
+Our dynamic pricing system uses a machine learning model trained to optimize product prices based on several factors, with a focus on expiry dates. Here's how the process works:
+
+Data Input:
+Sellers upload product details and an image showing the expiry date.
+This includes fields like product title, original price, manufacturing and expiry dates, product category, etc.
+
+OCR Processing:
+We use OCR (Optical Character Recognition) powered by Gemini 1.5 Vision API to accurately extract expiry dates from the uploaded product images.
+
+Feature Engineering:
+The extracted expiry date is used to calculate the number of days remaining.
+We also factor in:
+Product demand
+Historical pricing data
+Time remaining till expiry
+Category sensitivity
+Seasonal demand trends (optional future improvement)
+
+Model Prediction:
+A Support Vector Regression (SVR) model predicts the discount percentage based on the input features.
+The final discounted price is calculated and displayed in real-time.
+
+Dynamic Updates:
+As each day passes or new demand data comes in, the pricing is recalculated.
+This ensures buyers get the best price, and sellers can move inventory more effectively.
+
+Result:
+Customers see a lower price for products that are safe to consume but nearing expiry.
+Retailers sell stock that would otherwise go to waste.
+This ML-driven system not only reduces product waste but also increases affordability and efficiency for both buyers and sellers.
+
+SaveMore is not just an e-commerce platform — it’s a smarter way to shop and sell.
